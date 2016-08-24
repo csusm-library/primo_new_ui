@@ -52,3 +52,11 @@ prm-logo div.product-logo-local {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+/* services menu in item full display */
+prm-full-view .services-index-under .md-button {
+    max-width: 100%;
+    overflow: visible;
+    white-space: normal;
+    line-height: normal;
+}
