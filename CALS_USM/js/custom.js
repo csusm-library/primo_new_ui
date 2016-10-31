@@ -3,6 +3,10 @@
     'use strict';
 
     var app = angular.module('viewCustom', ['angularLoad']);
+    app.config(['$compileProvider',
+      function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
+    }]);
     app.controller('prmLogoAfterController', [function () {
 
       var vm = this;
