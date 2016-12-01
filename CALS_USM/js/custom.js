@@ -1,15 +1,15 @@
   //Add RIS Export
 
 (function () {
-    "use strict";
-    'use strict';
+  "use strict";
+  'use strict';
 
 
-    var app = angular.module('viewCustom', ['angularLoad'], function ($compileProvider) {
+  var app = angular.module('viewCustom', ['angularLoad'], function ($compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
   });
 
-    function isMobile() {
+  function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
@@ -121,7 +121,7 @@
           <a ng-href="data:text/plain;charset=utf-8,{{$ctrl.getRIS()}}" download="catalyst.ris">
           <div layout="column" layout-align="center center" class="layout-align-center-center layout-column">
           <prm-icon style="z-index:1; color: rgba(0, 0, 0, 0.57);" icon-type="svg" svg-icon-set="primo-actions" icon-definition="refworks"></prm-icon>
-          <span class="action-list-addon-text">Export RIS<br><div style="line-height:0px;">(EndNote/Zotero)</div></span>
+          <span class="action-list-addon-text">Export RIS<br><div style="line-height:0px;">(Zotero)</div></span>
           </div>
           </a>
           </div>
@@ -149,5 +149,13 @@
       <a href="https://biblio.csusm.edu/">
       <img class="logo-image" alt="{{::('nui.header.LogoAlt' | translate)}}" ng-src="{{$ctrl.getIconLink()}}"/></a></div>`
     });
+
+    app.controller('prmViewOnlineController', [function () {
+      var myEl = angular.element( document.querySelector( '#getit_link1_0 a.arrow-link' ) );
+      var myElAttr = myEl.attr('href');
+      if (myElAttr.indexOf("search.proquest") !== -1 && !myElAttr.indexOf("ezproxy") !== -1) {
+        myEl.attr('href', 'http://ezproxy.csusm.edu/login?url='+myElAttr)
+      } 
+    }]);
 
 })();
