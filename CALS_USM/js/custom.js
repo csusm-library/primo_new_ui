@@ -150,12 +150,23 @@
       <img class="logo-image" alt="{{::('nui.header.LogoAlt' | translate)}}" ng-src="{{$ctrl.getIconLink()}}"/></a></div>`
     });
 
-    app.controller('prmViewOnlineController', [function () {
+})();
+
+function checkProquest(){
+  setTimeout(function(){
+    //timeout set to ensure all elements of page are present before running function
+    var checkResultPage = document.body.innerHTML.toString().search('full-view-section-content');
+    if (checkResultPage > -1){
       var myEl = angular.element( document.querySelector( '#getit_link1_0 a.arrow-link' ) );
       var myElAttr = myEl.attr('href');
-      if (myElAttr.indexOf("search.proquest") !== -1 && !myElAttr.indexOf("ezproxy") !== -1) {
+      if (myElAttr.indexOf("search.proquest") !== -1 && myElAttr.indexOf("ezproxy") == -1) {
         myEl.attr('href', 'http://ezproxy.csusm.edu/login?url='+myElAttr)
-      } 
-    }]);
+      }
+    }
+  },1000)
+}
 
-})();
+//load zeroResults function every 2 seconds
+window.setInterval(function(){
+  checkProquest();
+},3000);
