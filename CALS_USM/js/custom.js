@@ -13,6 +13,19 @@
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
+  /** Bring back the scopes for basic searches **/
+  app.component('prmSearchBarAfter', {
+      bindings: {parentCtrl: '<'},
+      controller: 'SearchBarAfterController'
+  });
+   
+  app.controller('SearchBarAfterController', ['angularLoad', function (angularLoad) {
+  var vm = this;
+  vm.parentCtrl.showTabsAndScopes = true;
+  }]);
+   
+  /** END Bring back the scopes for basic searches **/
+
   //Add Text Record Link and RIS Export
 
   app.controller('prmActionListAfterController', [function () {
