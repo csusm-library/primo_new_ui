@@ -1,10 +1,3 @@
-  //Add RIS Export
-
-(function () {
-  "use strict";
-  'use strict';
-
-
   var app = angular.module('viewCustom', ['angularLoad'], function ($compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
   });
@@ -25,6 +18,21 @@
   }]);
    
   /** END Bring back the scopes for basic searches **/
+
+  app.component('prmUserAreaAfter', {
+    bindings: {
+        parentCtrl: '<'
+    },
+    controller: function($compile, $scope, $templateCache, $element) {
+      $templateCache.put('components/search/topbar/userArea/user-area.html', `
+          <div layout='row' layout-align="center center">
+            <prm-authentication layout="flex" [is-logged-in]="$ctrl.userName().length > 0"></prm-authentication>
+            <prm-library-card-menu></prm-library-card-menu>
+          </div>`);
+
+      $compile($element.parent())($scope);
+    }
+  });
 
   //Add Text Record Link and RIS Export
 
@@ -142,10 +150,6 @@
           <div style="clear:both;"></div>`
   });
 
-  
-  
-  // Add Clickable
-
   // Add Clickable Logo
     app.controller('prmLogoAfterController', [function () {
       var vm = this;
@@ -163,23 +167,21 @@
       <img class="logo-image" alt="{{::('nui.header.LogoAlt' | translate)}}" ng-src="{{$ctrl.getIconLink()}}"/></a></div>`
     });
 
-})();
-
-function checkProquest(){
-  setTimeout(function(){
-    //timeout set to ensure all elements of page are present before running function
-    var checkResultPage = document.body.innerHTML.toString().search('full-view-section-content');
-    if (checkResultPage > -1){
-      var myEl = angular.element( document.querySelector( '#getit_link1_0 a.arrow-link' ) );
-      var myElAttr = myEl.attr('href');
-      if (myElAttr.indexOf("search.proquest") !== -1 && myElAttr.indexOf("ezproxy") == -1) {
-        myEl.attr('href', 'http://ezproxy.csusm.edu/login?url='+myElAttr)
-      }
+    function checkProquest(){
+      setTimeout(function(){
+        //timeout set to ensure all elements of page are present before running function
+        var checkResultPage = document.body.innerHTML.toString().search('full-view-section-content');
+        if (checkResultPage > -1){
+          var myEl = angular.element( document.querySelector( '#getit_link1_0 a.arrow-link' ) );
+          var myElAttr = myEl.attr('href');
+          if (myElAttr.indexOf("search.proquest") !== -1 && myElAttr.indexOf("ezproxy") == -1) {
+            myEl.attr('href', 'http://ezproxy.csusm.edu/login?url='+myElAttr)
+          }
+        }
+      },1000)
     }
-  },1000)
-}
 
-//load zeroResults function every 2 seconds
-window.setInterval(function(){
-  checkProquest();
-},3000);
+    //load zeroResults function every 2 seconds
+    window.setInterval(function(){
+      checkProquest();
+    },3000);
