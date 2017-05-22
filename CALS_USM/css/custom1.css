@@ -19,6 +19,7 @@ prm-search > md-content.md-primoExplore-theme .main {
 
 body {
   font-size: 16px;
+  background: #000;
 }
 
 
@@ -43,8 +44,8 @@ prm-main-menu[menu-type="menu"] .md-button {
   font-size: 16px;
   color: #fff;
   text-transform: capitalize;
-  min-width: 120px;
 }
+
 prm-main-menu[menu-type="menu"] .md-button:last-child {
   min-width: 150px;
 }
@@ -84,11 +85,19 @@ prm-journals-search-bar, prm-search-bar {
 }
 
 
+/* Search results */
+
+.best-location-library-code locations-link {
+  display: none;
+}
+
+
 /* facets sidebar */
 #facets.sidebar {
   background: #f9f9f9;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-top: 30px;
 }
 
 
@@ -100,10 +109,12 @@ prm-action-list>md-nav-bar nav {
 }
 
 prm-full-view .services-index-under .md-button {
-  max-width: 100%;
+  max-width: 95%;
   overflow: visible;
   white-space: normal;
   line-height: normal;
+  font-size: 16px;
+  margin-bottom: 20px !important;
 }
 
 prm-action-list>md-nav-bar .md-nav-item .md-button {
@@ -111,9 +122,10 @@ prm-action-list>md-nav-bar .md-nav-item .md-button {
 }
 
 prm-action-list-after {
-    float: left;
-    margin-top: -50px;
-    margin-left: 36px;
+  position: absolute;
+  margin-top: 48px;
+  margin-left: 36px;
+  top: 0;
 }
 
 .action-list-addon-text {
